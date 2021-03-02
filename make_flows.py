@@ -277,7 +277,7 @@ print('outputs ready')
 
 # %% 6) Write data for visualisation
 
-# [export to Excel] flow time series of bias-corrected inflows
+# [export to Excel] AHA output (see worksheets 2-4 of AHA)
 writer : ExcelWriter = pd.ExcelWriter('Results.xlsx')
 
 df_names = pd.DataFrame(np.array(index_name)[output_binary])
