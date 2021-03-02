@@ -286,17 +286,14 @@ df_names.to_excel(writer, 'Results', index = False, startcol = 0, header = ["Nam
 df_countries = pd.DataFrame(np.array(index_country)[output_binary])
 df_countries.to_excel(writer, 'Results', index = False, startcol = 1, header = ["Country"])
 
-df_Q_normal = pd.DataFrame(Q_bymonth_normal_reservoir[output_binary,:])
-df_Q_normal.to_excel(writer,'Results', index = False, startcol = 2, header = [i+j+k for i,j,k in zip(months_names_short,header_flow,header_normal)])
-
 df_output_normal = pd.DataFrame(CF_bymonth_normal[output_binary,:])
-df_output_normal.to_excel(writer, 'Results', index = False, startcol = 14, header = [i+j+k for i,j,k in zip(months_names_short,header_output,header_normal)])
+df_output_normal.to_excel(writer, 'Results', index = False, startcol = 2, header = [i+j+k for i,j,k in zip(months_names_short,header_output,header_normal)])
 
 df_output_dry = pd.DataFrame(CF_bymonth_dry[output_binary,:])
-df_output_dry.to_excel(writer, 'Results', index = False, startcol = 26, header = [i+j+k for i,j,k in zip(months_names_short,header_output,header_dry)])
+df_output_dry.to_excel(writer, 'Results', index = False, startcol = 14, header = [i+j+k for i,j,k in zip(months_names_short,header_output,header_dry)])
 
 df_output_wet = pd.DataFrame(CF_bymonth_wet[output_binary,:])
-df_output_wet.to_excel(writer, 'Results', index = False, startcol = 38, header = [i+j+k for i,j,k in zip(months_names_short,header_output,header_wet)])
+df_output_wet.to_excel(writer, 'Results', index = False, startcol = 26, header = [i+j+k for i,j,k in zip(months_names_short,header_output,header_wet)])
 
 writer.save()
 
