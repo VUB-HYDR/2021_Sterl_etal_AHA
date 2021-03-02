@@ -140,7 +140,7 @@ for n in range(len(days_year)):
     positions[n+1] = hrs_day*days_year[n] + positions[n]
 
 
-# [preallocate] the (uncorrected) flow time series (ha*m/s) and its seasonality (normalised) from the SWAT simulations
+# [preallocate] the (uncorrected) flow time series and its seasonality (normalised) from the SWAT simulations
 flow_extract = np.zeros(shape = (len(index), len(years_full)*months_yr))
 
 # [extract] flow per channel ID
@@ -188,7 +188,7 @@ corr_dry = np.ones(shape = len(index))*np.nan
 corr_wet = np.ones(shape = len(index))*np.nan
 
 
-# [preallocate] the corresponding mean and lower/upper bounds of bias-corrected flow
+# [preallocate] the corresponding normal and dry/wet bounds of bias-corrected flow
 Q_bias_corrected_bymonth_normal_natural = np.full([len(index), months_yr], np.nan)
 Q_bias_corrected_bymonth_dry_natural = np.full([len(index), months_yr], np.nan)
 Q_bias_corrected_bymonth_wet_natural = np.full([len(index), months_yr], np.nan)
@@ -233,7 +233,7 @@ for n in range(len(index)):
         corr_wet[n] = np.nanmean(flow_extract[n, np.arange(np.int(year_of_wet_flow[n]*months_yr), np.int((year_of_wet_flow[n] + 1)*months_yr), 1)]) / np.nanmean(flow_extract[n,:])
 
 
-# [cap] the dry and wet ranges in case SWAT+ simulation gives unreasonably extreme results (dry year: 10% of mean annual flow; wet year: 4x mean annual flow)
+# [cap] the dry and wet ranges in case SWAT+ simulation gives unreasonably extreme results (dry year: less than ca. 10% of mean annual flow; wet year: more than ca. 4x mean annual flow)
 for n in range(len(index)):
     if corr_dry[n] < np.nanpercentile(corr_dry, 5):
         corr_dry[n] = np.nanpercentile(corr_dry, 5)
@@ -247,7 +247,7 @@ for n in range(len(index)):
     seasonality_wet[n,:] = seasonality_normal[n,:]*corr_wet[n]
 
 
-# [calculate] flow time series bias-corrected by correction factor (yearly average flow / 0.5*design discharge)  (in m^3/s)
+# [calculate] flow time series bias-corrected (in m^3/s)
 for n in range(len(index)):
     if bias_correction_yearly[n] > 0:
         Q_bias_corrected_bymonth_normal_natural[n,:] = bias_correction_yearly[n]*seasonality_normal[n,:]
