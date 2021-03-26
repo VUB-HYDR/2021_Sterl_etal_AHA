@@ -1,7 +1,7 @@
 
 # 2021_Sterl_etal_AHA 
 
-Code for the paper "A spatiotemporal atlas of hydropower in Africa for energy modelling purposes".
+Code for the paper "A spatiotemporal atlas of hydropower in Africa for energy modelling purposes" by Sterl et al. (2021, https://open-research-europe.ec.europa.eu/articles/1-29).
 
 # To install and use
 
